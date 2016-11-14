@@ -1,0 +1,13 @@
+	Brad	Chamara	Cody	Jason	Mark	Nick	Ross	Scott	Seth	Shannon	Tom	Tony
+Brad	x	0	0	0	0	1	1	0	0	0	0	0
+Chamara	0	x	0	0	0	0	0	1	0	0	1	0
+Cody	0	0	x	0	0	0	0	0	1	0	0	1
+Jason	0	0	0	x	0	1	0	0	0	1	0	0
+Mark	0	0	0	0	x	0	0	1	0	1	0	0
+Nick	1	0	0	1	0	x	0	0	0	0	0	0
+Ross	1	0	0	0	0	0	x	0	1	0	0	0
+Scott	0	1	0	0	1	0	0	x	0	0	0	0
+Seth	0	0	1	0	0	0	1	0	x	0	0	0
+Shannon	0	0	0	1	1	0	0	0	0	x	0	0
+Tom	0	1	0	0	0	0	0	0	0	0	x	1
+Tony	0	0	1	0	0	0	0	0	0	0	1	x

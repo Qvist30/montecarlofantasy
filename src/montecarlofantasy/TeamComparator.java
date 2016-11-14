@@ -11,45 +11,12 @@ public class TeamComparator implements Comparator<Team> {
 		} else if (teamA.getTotalWins() > teamB.getTotalWins()) {
 			return -1;
 		} else {
-			return handleTiebreakers(teamA, teamB);
+			return 0;
 		}
 	}
 
 	public int handleTiebreakers(Team teamA, Team teamB) {
-
-		if (teamA.getName().equals("Jackie")) {
-			return handleJackieTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Brad")) {
-			return handleBradTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Seth")) {
-			return handleSethTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Tyler")) {
-			return handleTylerTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Joe")) {
-			return handleJoeTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Jason")) {
-			return handleJasonTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Ross")) {
-			return handleRossTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Tony")) {
-			return handleTonyTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Nick")) {
-			return handleNickTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Aaron")) {
-			return handleAaronTiebreakers(teamA, teamB);
-		}
-		if (teamA.getName().equals("Jeff")) {
-			return handleJeffTiebreakers(teamA, teamB);
-		}
+//		if(teamA.get)
 		return getError(teamA, teamB);
 	}
 
@@ -192,7 +159,72 @@ public class TeamComparator implements Comparator<Team> {
 					}
 				}
 			}
-		} else if (MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.brad.getTotalWins()
+		}  else if (MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.jackie.getTotalWins()
+				&& MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.seth.getTotalWins()
+				&& MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.tyler.getTotalWins()) {
+			if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
+					return -1;
+				}
+			} else {
+				if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.jackie) {
+						return 1;
+					} else {
+						return getAaronSethTylerTiebreaker(teamA, teamB);
+					}
+				} else if (MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+						&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.seth) {
+						return 1;
+					} else {
+						if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+								&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.tyler
+										.getProjectedPoints()) {
+							if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.tyler) {
+								return -1;
+							}
+						} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron
+								.getProjectedPoints()
+								&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler
+										.getProjectedPoints()) {
+							if (teamB == MonteCarloRun.jackie) {
+								return 1;
+							} else if (teamB == MonteCarloRun.tyler) {
+								return -1;
+							}
+						} else {
+							if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.tyler) {
+								return 1;
+							}
+						}
+					}
+				} else if (MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+						&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.tyler) {
+						return 1;
+					} else {
+						if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+								&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.seth
+										.getProjectedPoints()) {
+							if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.seth) {
+								return -1;
+							}
+						} else {
+							if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.seth) {
+								return 1;
+							}
+						}
+					}
+				}
+			}
+		}else if (MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.brad.getTotalWins()
 				&& MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.tyler.getTotalWins()
 				&& MonteCarloRun.aaron.getTotalWins() == MonteCarloRun.seth.getTotalWins()) {
 			if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.brad.getProjectedPoints()
@@ -482,7 +514,8 @@ public class TeamComparator implements Comparator<Team> {
 					return getPointsTiebreaker(teamA, teamB);
 				}
 			}
-		} if (MonteCarloRun.ross.getTotalWins() == MonteCarloRun.brad.getTotalWins()
+		}
+		if (MonteCarloRun.ross.getTotalWins() == MonteCarloRun.brad.getTotalWins()
 				&& MonteCarloRun.ross.getTotalWins() == MonteCarloRun.jason.getTotalWins()) {
 			if (MonteCarloRun.ross.getProjectedPoints() > MonteCarloRun.brad.getProjectedPoints()
 					&& MonteCarloRun.ross.getProjectedPoints() > MonteCarloRun.jason.getProjectedPoints()) {
@@ -1067,7 +1100,56 @@ public class TeamComparator implements Comparator<Team> {
 					}
 				}
 			}
-		} else if (MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.brad.getTotalWins()
+		} else if (MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.jackie.getTotalWins()
+				&& MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.aaron.getTotalWins()
+				&& MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.seth.getTotalWins()) {
+			if (MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+					&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.aaron || teamB == MonteCarloRun.seth) {
+					return -1;
+				}
+			} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()
+					&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+					&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.jackie) {
+					return 1;
+				} else {
+					return getTylerAaronSethTiebreaker(teamA, teamB);
+				}
+			} else if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.aaron) {
+					return 1;
+				} else
+					return getTylerJackieSethTiebreaker(teamA, teamB);
+			} else if (MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()
+					&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.seth) {
+					return 1;
+				} else if (MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.jackie || teamB == MonteCarloRun.aaron) {
+						return -1;
+					}
+				} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.jackie) {
+						return 1;
+					} else if (teamB == MonteCarloRun.aaron) {
+						return 1;
+					}
+				} else {
+					if (teamB == MonteCarloRun.aaron) {
+						return 1;
+					} else if (teamB == MonteCarloRun.jackie) {
+						return -1;
+					}
+				}
+			}
+		}else if (MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.brad.getTotalWins()
 				&& MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.jackie.getTotalWins()
 				&& MonteCarloRun.tyler.getTotalWins() == MonteCarloRun.seth.getTotalWins()) {
 			if (MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.brad.getProjectedPoints()
@@ -2370,7 +2452,76 @@ public class TeamComparator implements Comparator<Team> {
 	}
 
 	private int handleJackieTiebreakers(Team teamA, Team teamB) {
-
+		if (MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.aaron.getTotalWins()
+				&& MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.seth.getTotalWins()
+				&& MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.tyler.getTotalWins()) {
+			if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+					&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+					&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.aaron || teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
+					return -1;
+				}
+			} else if (MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+					&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.aaron) {
+					return 1;
+				} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+					if (teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
+						return -1;
+					}
+				} else if (teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
+					return 1;
+				}
+			} else if (MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+					&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.seth) {
+					return 1;
+				} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+					if(teamB == MonteCarloRun.aaron || teamB == MonteCarloRun.tyler) {
+						return -1;
+					}
+				} else if(MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
+					if(teamB == MonteCarloRun.aaron || teamB== MonteCarloRun.tyler) {
+						return 1;
+					}
+				} else if(MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()) {
+					if(teamB == MonteCarloRun.tyler) {
+						return 1;
+					} else if(teamB == MonteCarloRun.aaron) {
+						return -1;
+					}
+				}
+			} else if (MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+					&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+					&& MonteCarloRun.tyler.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+				if (teamB == MonteCarloRun.tyler) {
+					return 1;
+				} else if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
+						&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+					if(teamB == MonteCarloRun.aaron || teamB == MonteCarloRun.seth) {
+						return -1;
+					}
+				} else if(MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.aaron.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()) {
+						if(teamB == MonteCarloRun.aaron || teamB == MonteCarloRun.seth) {
+							return 1;
+						}
+				}  else if(MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.jackie.getProjectedPoints()
+						&& MonteCarloRun.seth.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()) {
+						if(teamB == MonteCarloRun.seth) {
+							return 1;
+						} else if(teamB == MonteCarloRun.aaron) {
+							return -1;
+						}
+				}
+			}
+		}
 		if (MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.aaron.getTotalWins()
 				&& MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.seth.getTotalWins()) {
 			if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.aaron.getProjectedPoints()
@@ -2475,11 +2626,12 @@ public class TeamComparator implements Comparator<Team> {
 		}
 		if (MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.seth.getTotalWins()
 				&& MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.tyler.getTotalWins()) {
-			if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints() && MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints() ) {
+			if (MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.seth.getProjectedPoints()
+					&& MonteCarloRun.jackie.getProjectedPoints() > MonteCarloRun.tyler.getProjectedPoints()) {
 				if (teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
 					return -1;
 				}
-			} else if(teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler){
+			} else if (teamB == MonteCarloRun.seth || teamB == MonteCarloRun.tyler) {
 				return 1;
 			}
 		} else if (MonteCarloRun.jackie.getTotalWins() == MonteCarloRun.brad.getTotalWins()) {
@@ -2500,7 +2652,7 @@ public class TeamComparator implements Comparator<Team> {
 			}
 		} else if (teamB == MonteCarloRun.tyler) {
 			return 1;
-		} else if(teamB == MonteCarloRun.seth) {
+		} else if (teamB == MonteCarloRun.seth) {
 			return 1;
 		}
 		return getError(teamA, teamB);

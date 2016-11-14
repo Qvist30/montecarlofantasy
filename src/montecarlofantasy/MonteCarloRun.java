@@ -33,12 +33,18 @@ public class MonteCarloRun {
 //	private static Week week12 = new Week(week12Matchup1, week12Matchup2, week12Matchup3, week12Matchup4, week12Matchup5, week12Matchup6);
 
 	// WEEK 13 MATCHUPs
-	private static Matchup week13Matchup1 = new Matchup(jeff, tom);
-	private static Matchup week13Matchup2 = new Matchup(joe, jason);
-	private static Matchup week13Matchup3 = new Matchup(nick, jackie);
-	private static Matchup week13Matchup4 = new Matchup(ross, seth);
-	private static Matchup week13Matchup5 = new Matchup(aaron, brad);
-	private static Matchup week13Matchup6 = new Matchup(tyler, tony);	
+//	private static Matchup week13Matchup1 = new Matchup(jeff, tom);
+//	private static Matchup week13Matchup2 = new Matchup(joe, jason);
+//	private static Matchup week13Matchup3 = new Matchup(nick, jackie);
+//	private static Matchup week13Matchup4 = new Matchup(ross, seth);
+//	private static Matchup week13Matchup5 = new Matchup(aaron, brad);
+//	private static Matchup week13Matchup6 = new Matchup(tyler, tony);
+	private static Matchup week13Matchup1 = new Matchup(jeff, 78, 58.8, tom, 102, 91.9);
+	private static Matchup week13Matchup2 = new Matchup(joe, 95.5, 71.6, jason, 109, 77.6);
+	private static Matchup week13Matchup3 = new Matchup(nick, 63, 30, jackie, 133, 112.8);
+	private static Matchup week13Matchup4 = new Matchup(ross, 122, 91.7, seth, 93, 67);
+	private static Matchup week13Matchup5 = new Matchup(aaron, 124.5, 74.5, brad, 105, 95.7);
+	private static Matchup week13Matchup6 = new Matchup(tyler, 84, 68.8, tony, 81, 43.6);
 	private static Week week13 = new Week(week13Matchup1, week13Matchup2, week13Matchup3, week13Matchup4, week13Matchup5, week13Matchup6);
 	public static boolean billyOverAaron;
 	public static final int NUMBER_OF_WEEKS_PLAYED = 12;
@@ -64,6 +70,9 @@ public class MonteCarloRun {
 			for(Map.Entry<Integer, Integer> entry : team.getWinMap().entrySet()) {
 				System.out.println("\tWins\t" + entry.getKey() +"\t" +  entry.getValue());
 			}
+			System.out.println("\tOver 1300: " + team.getNumberOfTimesOver1300());
+			System.out.println("\tOver 1475: " + team.getNumberOfTimesOver1475());
+
 		}
 	}
 
@@ -74,7 +83,7 @@ public class MonteCarloRun {
 			teams.get(i).addWinsToMap();
 			teams.get(i).addPoints();
 			System.out.println((i+1) + ":" + teams.get(i).getName() + " " + teams.get(i).getTotalWins() + " " + teams.get(i).getProjectedPoints());
-
+			
 		}
 	}
 

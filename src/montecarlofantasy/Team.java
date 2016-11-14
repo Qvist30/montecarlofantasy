@@ -1,5 +1,6 @@
 package montecarlofantasy;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -10,11 +11,23 @@ public class Team {
 	double stdev;
 	double projectedWins;
 	double projectedPoints;
+
+	Map<String, Integer> numberOfGamesPlayed = new HashMap<String, Integer>();
+	Map<String, Integer> numberOfGamesWon = new HashMap<String, Integer>();
+	Map<String, Integer> numberOfGamesRemaining = new HashMap<String, Integer>();
+	
+	Map<String, Integer> originalGamesPlayedMap = new HashMap<String, Integer>();
+	Map<String, Integer> originalGamesWon = new HashMap<String, Integer>();
+	Map<String, Integer> originalGamesRemaining = new HashMap<String, Integer>();
+
 	
 	Map<Integer, Integer> seedMap = new TreeMap<Integer, Integer>();
 	Map<Integer, Integer> winMap = new TreeMap<Integer, Integer>();
 	int totalNumberOfWinsThroughSimulation;
 	int totalNumberOfPointsThroughSimulation;
+	private int numberOfTimesOver1475;
+	private int numberOfTimesOver1300;
+
 
 	
 	public Team(String name, double numberOfWins, double averagePoints, double stdev) {
@@ -65,7 +78,7 @@ public class Team {
 	}
 	
 	public double getProjectedPoints() {
-		return projectedPoints + averagePoints * MonteCarloRun.NUMBER_OF_WEEKS_PLAYED;
+		return projectedPoints + averagePoints * 9;
 	}
 	
 	public double getTotalWins() {
@@ -100,6 +113,9 @@ public class Team {
 	
 	public void addPoints() {
 		totalNumberOfPointsThroughSimulation += getProjectedPoints();
+		numberOfTimesOver1475 = getProjectedPoints() >=1475 ? numberOfTimesOver1475 +1 : numberOfTimesOver1475;
+		numberOfTimesOver1300 = getProjectedPoints() >=1300 ? numberOfTimesOver1300 +1 : numberOfTimesOver1300;
+
 	}
 
 	public Map<Integer, Integer> getWinMap() {
@@ -124,6 +140,93 @@ public class Team {
 
 	public void setTotalNumberOfPointsThroughSimulation(int totalNumberOfPointsThroughSimulation) {
 		this.totalNumberOfPointsThroughSimulation = totalNumberOfPointsThroughSimulation;
+	}
+
+	public int getNumberOfTimesOver1475() {
+		return numberOfTimesOver1475;
+	}
+
+	public void setNumberOfTimesOver1475(int numberOfTimesOver1475) {
+		this.numberOfTimesOver1475 = numberOfTimesOver1475;
+	}
+
+	public int getNumberOfTimesOver1300() {
+		return numberOfTimesOver1300;
+	}
+
+	public void setNumberOfTimesOver1300(int numberOfTimesOver1300) {
+		this.numberOfTimesOver1300 = numberOfTimesOver1300;
+	}
+	
+	public Map<String, Integer> getNumberOfGamesRemaining() {
+		return numberOfGamesRemaining;
+	}
+
+	public void setNumberOfGamesRemaining(Map<String, Integer> numberOfGamesRemaining) {
+		this.numberOfGamesRemaining = numberOfGamesRemaining;
+	}
+
+	public void addRemainingGames(String name, int remaining) {
+		
+		if(numberOfGamesRemaining.containsKey(name)) {
+			numberOfGamesRemaining.put(name, numberOfGamesRemaining.get(name)+remaining);
+
+		} else {
+			numberOfGamesRemaining.put(name, remaining);
+		}
+
+	}
+	
+	public void addNumberOfGamesWon(String name, int remaining) {
+		
+		if(numberOfGamesWon.containsKey(name)) {
+			numberOfGamesWon.put(name, numberOfGamesWon.get(name)+remaining);
+
+		} else {
+			numberOfGamesWon.put(name, remaining);
+		}
+
+	}
+	
+	public Map<String, Integer> getNumberOfGamesWon() {
+		return numberOfGamesWon;
+	}
+
+	public void setNumberOfGamesWon(Map<String, Integer> numberOfGamesWon) {
+		this.numberOfGamesWon = numberOfGamesWon;
+	}
+
+	public void addNumberOfGamesPlayed(String name, int remaining) {
+		
+		if(numberOfGamesPlayed.containsKey(name)) {
+			numberOfGamesPlayed.put(name, numberOfGamesPlayed.get(name)+remaining);
+		} else {
+			numberOfGamesPlayed.put(name, remaining);
+		}
+
+	}
+
+	public Map<String, Integer> getNumberOfGamesPlayed() {
+		return numberOfGamesPlayed;
+	}
+
+	public void setNumberOfGamesPlayed(Map<String, Integer> numberOfGamesPlayed) {
+		this.numberOfGamesPlayed = numberOfGamesPlayed;
+	}
+
+	public void initialize() {
+//		clear();
+		originalGamesPlayedMap = new HashMap<String, Integer>(numberOfGamesPlayed);
+		originalGamesRemaining = new HashMap<String, Integer>(numberOfGamesRemaining);
+		originalGamesPlayedMap = new HashMap<String, Integer>(numberOfGamesPlayed);
+
+	}
+	
+	public void reset() {
+		clear();
+		numberOfGamesPlayed  = new HashMap<String, Integer>(originalGamesPlayedMap);
+		numberOfGamesRemaining  = new HashMap<String, Integer>(originalGamesRemaining);
+		numberOfGamesPlayed  = new HashMap<String, Integer>(originalGamesPlayedMap);
 	}
 	
 }

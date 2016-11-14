@@ -1,0 +1,13 @@
+	Aaron	Bob	Brad	Jackie	Jason	Jeff	Joe	Nick	Ross	Tom	Tony	Tyler
+Aaron	x	1	0	1	1	1	0	0	0	0	0	0
+Bob	1	x	1	0	0	0	1	0	0	0	1	0
+Brad	0	1	x	0	0	0	1	0	0	0	1	1
+Jackie	1	0	0	x	1	1	1	0	0	0	0	0
+Jason	1	0	0	1	x	1	0	0	0	1	0	0
+Jeff	1	0	0	1	1	x	0	0	1	0	0	0
+Joe	0	1	1	1	0	0	x	0	0	0	1	0
+Nick	0	0	0	0	0	0	0	x	1	1	1	1
+Ross	0	0	0	0	0	1	0	1	x	1	0	1
+Tom	0	0	0	0	1	0	0	1	1	x	0	1
+Tony	0	1	1	0	0	0	1	1	0	0	x	0
+Tyler	0	0	1	0	0	0	0	1	1	1	0	x

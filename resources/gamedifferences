@@ -1,0 +1,13 @@
+	Aaron	Bob	Brad	Jackie	Jason	Jeff	Joe	Nick	Ross	Tom	Tony	Tyler
+Aaron	X	0	-1	1	1	-1	1	-1	1	-1	1	0
+Bob	0	x	1	-1	0	1	1	1	-1	-1	-1	-1
+Brad	1	-1	X	1	1	1	1	0	1	-1	1	0
+Jackie	-1	1	-1	X	1	1	0	1	1	1	0	-1
+Jason	-1	0	-1	-1	X	-1	-1	-1	-1	0	-1	1
+Jeff	1	-1	-1	-1	1	X	1	-1	0	0	1	1
+Joe	-1	-1	-1	0	1	-1	X	-1	0	-1	1	-1
+Nick	1	-1	0	-1	1	1	1	X	1	-1	0	1
+Ross	-1	1	-1	-1	1	0	0	-1	X	-1	-1	1
+Tom	1	1	1	-1	0	0	1	1	1	X	1	1
+Tony	-1	1	-1	0	1	-1	-1	0	1	-1	X	1
+Tyler	0	1	0	1	-1	-1	1	-1	-1	-1	-1	X
