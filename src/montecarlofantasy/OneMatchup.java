@@ -5,10 +5,10 @@ import java.util.Random;
 public class OneMatchup {
 
 	public static void main(String[] args) {
-		double team1Average = 98.5;
-		double team1Stdev = 25;
-		double team2Average = 97.6;
-		double team2Stdev = 25;
+		double team1Average = 82.05165;
+		double team1Stdev = 17.184;
+		double team2Average =84.95385;
+		double team2Stdev = 18.84454;
 		int team1Wins = 0;
 		int team2Wins = 0;
 		double team1High = 0;
@@ -16,7 +16,7 @@ public class OneMatchup {
 		double team1Low = Double.MAX_VALUE;
 		double team2Low = Double.MAX_VALUE;
 		Random random = new Random(System.currentTimeMillis());
-		for(int i=0; i<1;i++) {
+		for(int i=0; i<10000;i++) {
 			double team1Points = random.nextGaussian() * team1Stdev + team1Average;
 			double team2Points = random.nextGaussian() * team2Stdev + team2Average;
 			if(team1Points > team2Points) {

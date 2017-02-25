@@ -78,7 +78,7 @@ public class Team {
 	}
 	
 	public double getProjectedPoints() {
-		return projectedPoints + averagePoints * 9;
+		return projectedPoints + averagePoints * 12;
 	}
 	
 	public double getTotalWins() {
