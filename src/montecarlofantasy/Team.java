@@ -11,6 +11,11 @@ public class Team {
 	double stdev;
 	double projectedWins;
 	double projectedPoints;
+	int numberOfSemis = 0;
+	int numberOfFinals = 0;
+	int numberOfChampionships = 0;
+	int numberOfFirstPicks = 0;
+
 
 	Map<String, Integer> numberOfGamesPlayed = new HashMap<String, Integer>();
 	Map<String, Integer> numberOfGamesWon = new HashMap<String, Integer>();
@@ -27,6 +32,7 @@ public class Team {
 	int totalNumberOfPointsThroughSimulation;
 	private int numberOfTimesOver1475;
 	private int numberOfTimesOver1300;
+	private int pointsTitle;
 
 
 	
@@ -113,7 +119,7 @@ public class Team {
 	
 	public void addPoints() {
 		totalNumberOfPointsThroughSimulation += getProjectedPoints();
-		numberOfTimesOver1475 = getProjectedPoints() >=1475 ? numberOfTimesOver1475 +1 : numberOfTimesOver1475;
+		numberOfTimesOver1475 = getProjectedPoints() >=1571 ? numberOfTimesOver1475 +1 : numberOfTimesOver1475;
 		numberOfTimesOver1300 = getProjectedPoints() >=1300 ? numberOfTimesOver1300 +1 : numberOfTimesOver1300;
 
 	}
@@ -228,5 +234,68 @@ public class Team {
 		numberOfGamesRemaining  = new HashMap<String, Integer>(originalGamesRemaining);
 		numberOfGamesPlayed  = new HashMap<String, Integer>(originalGamesPlayedMap);
 	}
+
+	public void addSemiFinal() {
+		numberOfSemis++;
+	}
+
+	public void addFinals() {
+		numberOfFinals++;
+		
+	}
 	
+	public void addChampionship() {
+		numberOfChampionships++;
+		
+	}
+
+	public int getNumberOfSemis() {
+		return numberOfSemis;
+	}
+
+	public void setNumberOfSemis(int numberOfSemis) {
+		this.numberOfSemis = numberOfSemis;
+	}
+
+	public int getNumberOfFinals() {
+		return numberOfFinals;
+	}
+
+	public void setNumberOfFinals(int numberOfFinals) {
+		this.numberOfFinals = numberOfFinals;
+	}
+
+	public int getNumberOfChampionships() {
+		return numberOfChampionships;
+	}
+
+	public void setNumberOfChampionships(int numberOfChampionships) {
+		this.numberOfChampionships = numberOfChampionships;
+	}
+
+	public void addPointsTitle() {
+		pointsTitle++;
+		
+	}
+
+	public int getPointsTitle() {
+		return pointsTitle;
+	}
+
+	public void setPointsTitle(int pointsTitle) {
+		this.pointsTitle = pointsTitle;
+	}
+
+	public void add1stPick() {
+		numberOfFirstPicks++;
+	}
+
+	public int getNumberOfFirstPicks() {
+		return numberOfFirstPicks;
+	}
+
+	public void setNumberOfFirstPicks(int numberOfFirstPicks) {
+		this.numberOfFirstPicks = numberOfFirstPicks;
+	}
+
 }
