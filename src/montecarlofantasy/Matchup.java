@@ -43,18 +43,32 @@ public class Matchup {
 	}
 	
 	public double getTeamAPoints() {
-		if(projectedAPoints > 0) {
-			return ((RANDOM.nextGaussian() * teamA.getStdev()) +(projectedAPoints - actualPointsA))+ actualPointsA;
+		double stDevMultiplier = 1;
+		if(teamA.getGamesRemaining() > 1) {
+			stDevMultiplier = teamA.getGamesRemaining();
 		}
-		return (RANDOM.nextGaussian() * teamA.getStdev()) + teamA.getAveragePoints();
+		if(projectedAPoints > 0) {
+			return ((RANDOM.nextGaussian() * (teamA.getStdev()*stDevMultiplier)) +(projectedAPoints - actualPointsA))+ actualPointsA;
+		}
+		return (RANDOM.nextGaussian() * (teamA.getStdev()*stDevMultiplier)) + teamA.getAveragePoints();
 	}
 	
 	public double getTeamBPoints() {
+		double stDevMultiplier = 1;
+		if(teamA.getGamesRemaining() > 1) {
+			stDevMultiplier = teamA.getGamesRemaining();
+		}
 		if(projectedBPoints > 0) {
-			return ((RANDOM.nextGaussian() * teamB.getStdev()) +(projectedBPoints - actualPointsB))+ actualPointsB;
+			return ((RANDOM.nextGaussian() * (teamB.getStdev()*stDevMultiplier)) +(projectedBPoints - actualPointsB))+ actualPointsB;
 
 		}
-		return (RANDOM.nextGaussian() * teamB.getStdev()) + teamB.getAveragePoints();
+		return (RANDOM.nextGaussian() * (teamB.getStdev()*stDevMultiplier)) + teamB.getAveragePoints();
 	}
 	
+	public static void main(String[] args) {
+		for(int i=0; i<100; i++) {
+			double num = RANDOM.nextGaussian()*4.8+9.92;
+			System.out.println(Math.exp(num));
+		}
+	}
 }

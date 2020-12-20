@@ -33,7 +33,8 @@ public class Team {
 	private int numberOfTimesOver1475;
 	private int numberOfTimesOver1300;
 	private int pointsTitle;
-
+	private int totalNumberOfSeedsThroughSimulation;
+	private int gamesRemaining;
 
 	
 	public Team(String name, double numberOfWins, double averagePoints, double stdev) {
@@ -84,9 +85,17 @@ public class Team {
 	}
 	
 	public double getProjectedPoints() {
-		return projectedPoints + averagePoints * 12;
+		return projectedPoints + averagePoints*(13-gamesRemaining);
 	}
 	
+	public int getGamesRemaining() {
+		return gamesRemaining;
+	}
+
+	public void setGamesRemaining(int gamesRemaining) {
+		this.gamesRemaining = gamesRemaining;
+	}
+
 	public double getTotalWins() {
 		return projectedWins + numberOfWins;
 	}
@@ -102,6 +111,7 @@ public class Team {
 		} else {
 			seedMap.put(i, 1);
 		}
+		totalNumberOfSeedsThroughSimulation += i;
 	}
 	
 	public Map<Integer, Integer> getSeedMap() {
@@ -225,7 +235,9 @@ public class Team {
 		originalGamesPlayedMap = new HashMap<String, Integer>(numberOfGamesPlayed);
 		originalGamesRemaining = new HashMap<String, Integer>(numberOfGamesRemaining);
 		originalGamesPlayedMap = new HashMap<String, Integer>(numberOfGamesPlayed);
-
+		for(int i : originalGamesRemaining.values()) {
+			gamesRemaining += i;
+		}
 	}
 	
 	public void reset() {
@@ -296,6 +308,14 @@ public class Team {
 
 	public void setNumberOfFirstPicks(int numberOfFirstPicks) {
 		this.numberOfFirstPicks = numberOfFirstPicks;
+	}
+
+	public int getTotalNumberOfSeedsThroughSimulation() {
+		return totalNumberOfSeedsThroughSimulation;
+	}
+
+	public void addProjectedTie() {
+		projectedWins+= .5;
 	}
 
 }

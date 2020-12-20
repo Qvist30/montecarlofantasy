@@ -19,6 +19,8 @@ import java.util.Set;
 
 public class MonteCarlo19 {
 
+	public static final double GAMES_PLAYED = 2.0;
+
 	static Map<String, Team> teams = new HashMap<String, Team>();
 
 	public static void main(String[] args) {
@@ -32,6 +34,7 @@ public class MonteCarlo19 {
 			reader.readLine();
 			while ((string = reader.readLine()) != null) {
 				String[] str = string.split("\t");
+//				System.out.println(str);
 				Team team = new Team(str[0], Double.valueOf(str[1]), Double.valueOf(str[2]), Double.valueOf(str[3]));
 				teams.put(str[0], team);
 			}
@@ -221,6 +224,8 @@ public class MonteCarlo19 {
 		// teamB.addProjectedPoints(teamBPoints);
 		// System.out.println(teamA.getName() + " " + teamAPoints + " " +
 		// teamB.getName() + " " + teamBPoints);
+//		if(teamA.getName().equals("Mark") || teamA.getName().equals("Brad") || teamA.getName().equals("Joe") || teamA.getName().equals("Aaron")) {
+
 		if (teamAPoints > teamBPoints) {
 			if(addFinal) {
 				teamA.addFinals();
@@ -245,7 +250,8 @@ public class MonteCarlo19 {
 		// teamB.addProjectedPoints(teamBPoints);
 		// System.out.println(teamA.getName() + " " + teamAPoints + " " +
 		// teamB.getName() + " " + teamBPoints);
-		if (teamAPoints > teamBPoints) {
+//		if (teamAPoints > teamBPoints) {
+		if(teamA.getName().equals("Tom") || teamA.getName().equals("Seth") || teamA.getName().equals("Mark") || teamA.getName().equals("Tyler")) {
 			if(addSemifinal) {
 				teamA.addSemiFinal();
 			}
@@ -263,20 +269,30 @@ public class MonteCarlo19 {
 	private static void processTeams(Collection<Team> teams) {
 		for (Team team : teams) {
 			System.out.println(team.getName() + "\tWins\t" + team.getTotalNumberOfWinsThroughSimulation() / 10000.0
-					+ "\tPoints\t" + team.getTotalNumberOfPointsThroughSimulation() / 10000.0);
-			for (Map.Entry<Integer, Integer> entry : team.getSeedMap().entrySet()) {
-				System.out.println("\tSeeds\t" + entry.getKey() + "\t" + entry.getValue());
+					+ "\tPoints\t" + team.getTotalNumberOfPointsThroughSimulation() / 10000.0
+					+ "\tSeed\t" + team.getTotalNumberOfSeedsThroughSimulation() / 10000.0);
+			int numPlayoffs = 0;
+			for (int i=1; i<=12; i++) {
+				int instances = team.getSeedMap().get(i) == null ? 0: team.getSeedMap().get(i);
+				if(i <= 6) {
+//					System.out.println(instances);
+					numPlayoffs += instances;
+				}
+				System.out.println("\tSeeds\t" + i + "\t" + instances);
 			}
-			for (Map.Entry<Integer, Integer> entry : team.getWinMap().entrySet()) {
-				System.out.println("\tWins\t" + entry.getKey() + "\t" + entry.getValue());
+			for (int i=0;i<=13; i++) {
+				int instances = team.getWinMap().get(i) == null ? 0: team.getWinMap().get(i);
+
+				System.out.println("\tWins\t" + i + "\t" + instances);
 			}
-			System.out.println("\tOver 1300: " + team.getNumberOfTimesOver1300());
-			System.out.println("\tOver 1475: " + team.getNumberOfTimesOver1475());
-			System.out.println("\tNumber of Semifinals: " + team.getNumberOfSemis());
-			System.out.println("\tNumber of Finals: " + team.getNumberOfFinals());
-			System.out.println("\tNumber of Championships: " + team.getNumberOfChampionships());
-			System.out.println("\tPoints Title: " + team.getPointsTitle());
-			System.out.println("\tGot 1st Pick: " + team.getNumberOfFirstPicks());
+			System.out.println("\tOver 1300: \t" + team.getNumberOfTimesOver1300());
+			System.out.println("\tOver 1475: \t" + team.getNumberOfTimesOver1475());
+			System.out.println("\tNumber of Playoffs: \t" + numPlayoffs);
+			System.out.println("\tNumber of Semifinals: \t" + team.getNumberOfSemis());
+			System.out.println("\tNumber of Finals: \t" + team.getNumberOfFinals());
+			System.out.println("\tNumber of Championships: \t" + team.getNumberOfChampionships());
+			System.out.println("\tPoints Title: \t" + team.getPointsTitle());
+			System.out.println("\tGot 1st Pick: \t" + team.getNumberOfFirstPicks());
 
 		}
 	}
